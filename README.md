@@ -4,7 +4,7 @@ Project developed for the API Development course, covering activities 1, 2, and 
 
 ---
 
-## 📌 1# Writing and Enhancing API Codeo
+## 📌 1# Writing and Enhancing API Code
 
 ### Issues Identified
 - **[Missing validation](ca://s?q=Add_model_validation_ASP.NET_Core)**: Users were added without checking required fields.  
