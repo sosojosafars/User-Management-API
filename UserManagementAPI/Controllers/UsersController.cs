@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using UserManagementAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +9,6 @@ namespace UserManagementAPI.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        // Simulação de um "banco de dados" em memória
         private static List<User> users = new List<User>
         {
             new User { Id = 1, Name = "Alice", Email = "alice@example.com" },
@@ -19,56 +19,89 @@ namespace UserManagementAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<User>> GetAllUsers()
         {
-            return Ok(users);
+            try
+            {
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
         }
 
         // GET: api/users/1
         [HttpGet("{id}")]
         public ActionResult<User> GetUserById(int id)
         {
-            var user = users.FirstOrDefault(u => u.Id == id);
-            if (user == null) return NotFound();
-            return Ok(user);
+            try
+            {
+                var user = users.FirstOrDefault(u => u.Id == id);
+                if (user == null) return NotFound($"Usuário com ID {id} não encontrado.");
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
         }
 
         // POST: api/users
         [HttpPost]
-        public ActionResult<User> CreateUser(User newUser)
+        public ActionResult<User> CreateUser([FromBody] User newUser)
         {
-            newUser.Id = users.Max(u => u.Id) + 1;
-            users.Add(newUser);
-            return CreatedAtAction(nameof(GetUserById), new { id = newUser.Id }, newUser);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                newUser.Id = users.Any() ? users.Max(u => u.Id) + 1 : 1;
+                users.Add(newUser);
+                return CreatedAtAction(nameof(GetUserById), new { id = newUser.Id }, newUser);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
         }
 
         // PUT: api/users/1
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, User updatedUser)
+        public IActionResult UpdateUser(int id, [FromBody] User updatedUser)
         {
-            var user = users.FirstOrDefault(u => u.Id == id);
-            if (user == null) return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            user.Name = updatedUser.Name;
-            user.Email = updatedUser.Email;
-            return NoContent();
+            try
+            {
+                var user = users.FirstOrDefault(u => u.Id == id);
+                if (user == null) return NotFound($"Usuário com ID {id} não encontrado.");
+
+                user.Name = updatedUser.Name;
+                user.Email = updatedUser.Email;
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
         }
 
         // DELETE: api/users/1
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
-            var user = users.FirstOrDefault(u => u.Id == id);
-            if (user == null) return NotFound();
+            try
+            {
+                var user = users.FirstOrDefault(u => u.Id == id);
+                if (user == null) return NotFound($"Usuário com ID {id} não encontrado.");
 
-            users.Remove(user);
-            return NoContent();
+                users.Remove(user);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
         }
-    }
-
-    // Modelo simples de usuário
-    public class User
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
     }
 }

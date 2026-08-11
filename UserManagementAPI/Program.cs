@@ -4,16 +4,16 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona serviços ao contêiner
+// Serviços
 builder.Services.AddControllers();
-
-// Adiciona suporte ao Swagger (documentação da API)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configura o pipeline de requisição HTTP
+// Middleware de exceções globais
+app.UseExceptionHandler("/error");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -21,9 +21,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
