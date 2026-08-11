@@ -1,40 +1,62 @@
 # UserManagementAPI
 
-Projeto desenvolvido para a disciplina de Construção de APIs, contendo as atividades 1 e 2.
+Project developed for the API Development course, covering activities 1, 2, and 3
 
 ---
 
-## 📌 Atividade 1: Análise do Cenário
+## 📌 1# Writing and Enhancing API Codeo
 
-### Problemas identificados
-- **[Validação ausente](ca://s?q=Adicionar_validacao_Model_ASP.NET_Core)**: Usuários eram adicionados sem checagem de dados obrigatórios.
-- **[Busca inexistente](ca://s?q=Tratar_usuario_inexistente_ASP.NET_Core)**: Erros ao tentar recuperar usuários que não existem.
-- **[Exceções não tratadas](ca://s?q=Tratar_excecoes_ASP.NET_Core)**: Falhas ocasionais por falta de tratamento global de erros.
-- **Persistência em memória**: Dados armazenados apenas em lista estática, sem banco de dados real.
-- **Mensagens de erro genéricas**: Respostas inconsistentes dificultavam o consumo da API.
+### Issues Identified
+- **[Missing validation](ca://s?q=Add_model_validation_ASP.NET_Core)**: Users were added without checking required fields.  
+- **[Missing search](ca://s?q=Handle_nonexistent_user_ASP.NET_Core)**: Errors occurred when retrieving non-existent users.  
+- **[Unhandled exceptions](ca://s?q=Handle_exceptions_ASP.NET_Core)**: Occasional failures due to lack of global error handling.  
+- In-memory persistence only: Data stored in a static list without a real database.  
+- Generic error messages: Inconsistent responses made API consumption difficult.  
+---
+
+## 📌 2# Debugging API Code 
+
+### 1. Data Validation
+- Implemented `DataAnnotations` in the `User` model:  
+  - `[Required]` for mandatory fields.  
+  - `[EmailAddress]` to validate email format.  
+  - `[StringLength]` to limit string size.  
+
+### 2. Exception Handling
+- Added `try-catch` blocks in all `UsersController` endpoints.  
+- Created **ErrorController** to capture global exceptions via `app.UseExceptionHandler("/error")`.  
+
+### 3. Logic Optimization
+- Used `Any()` before `Max()` to avoid errors with empty lists.  
+- Replaced `Where().FirstOrDefault()` with `FirstOrDefault()` to reduce unnecessary operations.  
+- Standardized error messages (`BadRequest`, `NotFound`, `StatusCode(500)`).  
 
 ---
 
-## 📌 Atividade 2: Correções Aplicadas
-
-### 1. Validação de dados
-- Implementação de `DataAnnotations` no modelo `User`:
-  - `[Required]` para campos obrigatórios.
-  - `[EmailAddress]` para validar formato de email.
-  - `[StringLength]` para limitar tamanho de strings.
-
-### 2. Tratamento de exceções
-- Inclusão de blocos `try-catch` em todos os endpoints do `UsersController`.
-- Criação de **ErrorController** para capturar exceções globais via `app.UseExceptionHandler("/error")`.
-
-### 3. Otimização da lógica
-- Uso de `Any()` antes de `Max()` para evitar erros em listas vazias.
-- Substituição de `Where().FirstOrDefault()` por `FirstOrDefault()` para reduzir operações desnecessárias.
-- Padronização das mensagens de erro (`BadRequest`, `NotFound`, `StatusCode(500)`).
+## 🚀 Tests Performed
+- **[Invalid input](ca://s?q=Test_model_validation_ASP.NET_Core)**: POST with invalid email returns `400 Bad Request`.  
+- **[Non-existent IDs](ca://s?q=Test_nonexistent_user_ASP.NET_Core)**: GET with invalid IDs returns `404 Not Found`.  
 
 ---
 
-## 🚀 Testes Realizados
+## 📌 3# Implementing and Managing Middleware
 
-- **[Entrada inválida](ca://s?q=Testar_validacao_Model_ASP.NET_Core)**: POST com email inválido retorna `400 Bad Request`.
-- **[IDs inexistentes](ca://s?q=Testar_usuario_inexistente_ASP.NET_Core)**
+### Installed Packages
+- **[Microsoft.AspNetCore.Authentication.JwtBearer](ca://s?q=Microsoft.AspNetCore.Authentication.JwtBearer)**  
+- **[Microsoft.AspNetCore.OpenApi](ca://s?q=Microsoft.AspNetCore.OpenApi)**  
+- **[Microsoft.IdentityModel.Tokens](ca://s?q=Microsoft.IdentityModel.Tokens)**  
+- **[System.IdentityModel.Tokens.Jwt](ca://s?q=System.IdentityModel.Tokens.Jwt)**  
+- **[Swashbuckle.AspNetCore](ca://s?q=Swashbuckle.AspNetCore)**  
+- **[Microsoft.OpenApi](ca://s?q=Microsoft.OpenApi)** (2.2.0)  
+
+### Swagger Configuration with JWT Bearer
+- Defined security scheme.  
+- Added **Authorize** button in the Swagger UI.  
+- Enabled testing of protected endpoints using `Bearer <token>`.  
+
+---
+
+## ✅ Final Outcome
+- API validated with proper error handling.  
+- Optimized logic and standardized responses.  
+- Swagger configured with JWT authentication, enabling secure testing directly in the interface.  
