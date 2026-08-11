@@ -503,11 +503,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/lissandroflaviodossantos/backend.net/UserManagementAPI/UserManagementAPI.csproj",
+      "projectUniqueName": "/Users/lissandroflaviodossantos/Building-a-Simple-API/UserManagementAPI/UserManagementAPI.csproj",
       "projectName": "UserManagementAPI",
-      "projectPath": "/Users/lissandroflaviodossantos/backend.net/UserManagementAPI/UserManagementAPI.csproj",
+      "projectPath": "/Users/lissandroflaviodossantos/Building-a-Simple-API/UserManagementAPI/UserManagementAPI.csproj",
       "packagesPath": "/Users/lissandroflaviodossantos/.nuget/packages/",
-      "outputPath": "/Users/lissandroflaviodossantos/backend.net/UserManagementAPI/obj/",
+      "outputPath": "/Users/lissandroflaviodossantos/Building-a-Simple-API/UserManagementAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/lissandroflaviodossantos/.nuget/NuGet/NuGet.Config"
