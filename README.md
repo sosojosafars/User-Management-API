@@ -2,6 +2,8 @@
 
 Project developed for the API Development course, covering activities 1, 2, and 3
 
+<img width="1174" height="789" alt="Screenshot 2026-08-11 at 14 48 44" src="https://github.com/user-attachments/assets/afa20f41-cb5d-4f7b-8e65-cfc3f71c59e4" />
+
 ---
 
 ## 📌 1# Writing and Enhancing API Code
