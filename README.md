@@ -38,3 +38,5 @@ Projeto desenvolvido para a disciplina de Construção de APIs, contendo as ativ
 
 - **[Entrada inválida](ca://s?q=Testar_validacao_Model_ASP.NET_Core)**: POST com email inválido retorna `400 Bad Request`.
 - **[IDs inexistentes](ca://s?q=Testar_usuario_inexistente_ASP.NET_Core)**
+
+/atsrsf
